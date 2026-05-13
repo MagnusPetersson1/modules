@@ -1,0 +1,36 @@
+.toolbar {
+  display: flex;
+  align-items: center;
+  gap: 6px;
+  padding: 6px 12px;
+  background: #1565C0;
+  color: #fff;
+  font-size: 13px;
+}
+
+.brand {
+  font-weight: 700;
+  font-size: 15px;
+  margin-right: 8px;
+}
+
+.btn {
+  padding: 4px 12px;
+  border: 1px solid rgba(255,255,255,0.4);
+  border-radius: 4px;
+  background: rgba(255,255,255,0.1);
+  color: #fff;
+  cursor: pointer;
+  font-size: 13px;
+}
+
+.btn:hover {
+  background: rgba(255,255,255,0.25);
+}
+
+.divider {
+  flex: 0 0 1px;
+  height: 20px;
+  background: rgba(255,255,255,0.3);
+  margin: 0 4px;
+}

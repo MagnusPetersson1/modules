@@ -1,0 +1,231 @@
+.palette {
+  background: white;
+  border-radius: 8px;
+  border: 1px solid #e0e0e0;
+  box-shadow: 0 2px 12px rgba(0, 0, 0, 0.1);
+  padding: 0 0 6px;
+  min-width: 170px;
+  width: 170px;
+  user-select: none;
+  max-height: 640px;
+  display: flex;
+  flex-direction: column;
+}
+
+.tabs {
+  display: flex;
+  border-bottom: 1px solid #eee;
+  padding: 4px 4px 0;
+  gap: 2px;
+  flex-shrink: 0;
+}
+
+.tab {
+  flex: 1;
+  background: none;
+  border: 1px solid transparent;
+  border-bottom: none;
+  border-radius: 4px 4px 0 0;
+  padding: 3px 2px;
+  font-size: 9px;
+  font-weight: 700;
+  letter-spacing: 0.03em;
+  color: #999;
+  cursor: pointer;
+  transition: background 0.1s, color 0.1s;
+}
+
+.tab:hover {
+  background: #f5f5f5;
+  color: #555;
+}
+
+.tabActive {
+  background: #fff;
+  border-color: #ddd;
+  color: #333;
+  border-bottom-color: #fff;
+  margin-bottom: -1px;
+  position: relative;
+  z-index: 1;
+}
+
+.title {
+  font-size: 10px;
+  font-weight: 700;
+  text-transform: uppercase;
+  letter-spacing: 0.06em;
+  color: #999;
+  padding: 8px 8px 6px;
+  border-bottom: 1px solid #f0f0f0;
+  margin-bottom: 4px;
+  flex-shrink: 0;
+}
+
+.item {
+  display: flex;
+  align-items: center;
+  gap: 8px;
+  padding: 5px 8px;
+  border-radius: 5px;
+  cursor: grab;
+  transition: background 0.1s;
+}
+
+.item:hover {
+  background: #f5f5f5;
+}
+
+.item:active {
+  cursor: grabbing;
+}
+
+.preview {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  width: 26px;
+  flex-shrink: 0;
+}
+
+.previewBox {
+  width: 24px;
+  height: 18px;
+  border: 2px solid #888;
+}
+
+.label {
+  font-size: 12px;
+  color: #444;
+  white-space: nowrap;
+}
+
+/* ── Cloud icon grid ───────────────────────────────────────────── */
+
+.cloudHeader {
+  display: flex;
+  align-items: center;
+  gap: 6px;
+  padding: 6px 8px 4px;
+  border-bottom: 1px solid #f0f0f0;
+  flex-shrink: 0;
+}
+
+.cloudTitle {
+  font-size: 9px;
+  font-weight: 700;
+  text-transform: uppercase;
+  letter-spacing: 0.05em;
+  color: #aaa;
+  flex: 1;
+  white-space: nowrap;
+  overflow: hidden;
+  text-overflow: ellipsis;
+}
+
+.filterInput {
+  flex: 1;
+  min-width: 0;
+  font-size: 11px;
+  padding: 2px 6px;
+  border: 1px solid #ddd;
+  border-radius: 4px;
+  outline: none;
+  background: #fafafa;
+  color: #333;
+}
+
+.filterInput:focus {
+  border-color: #90caf9;
+  background: #fff;
+}
+
+.iconScroll {
+  overflow-y: auto;
+  flex: 1;
+  padding-bottom: 4px;
+}
+
+.emptyMsg {
+  font-size: 11px;
+  color: #bbb;
+  text-align: center;
+  padding: 16px 8px;
+}
+
+.groupHeader {
+  display: flex;
+  align-items: center;
+  gap: 4px;
+  width: 100%;
+  background: none;
+  border: none;
+  padding: 5px 8px 4px;
+  cursor: pointer;
+  text-align: left;
+  border-bottom: 1px solid #f5f5f5;
+  transition: background 0.1s;
+}
+
+.groupHeader:hover {
+  background: #f8f8f8;
+}
+
+.groupChevron {
+  font-size: 9px;
+  color: #999;
+  flex-shrink: 0;
+  width: 10px;
+}
+
+.groupName {
+  font-size: 10px;
+  font-weight: 600;
+  color: #555;
+  flex: 1;
+  white-space: nowrap;
+  overflow: hidden;
+  text-overflow: ellipsis;
+}
+
+.groupCount {
+  font-size: 9px;
+  color: #bbb;
+  flex-shrink: 0;
+}
+
+.iconGrid {
+  display: grid;
+  grid-template-columns: repeat(3, 1fr);
+  gap: 2px;
+  padding: 4px 6px 6px;
+}
+
+.iconItem {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  gap: 3px;
+  padding: 6px 2px 5px;
+  border-radius: 6px;
+  cursor: grab;
+  transition: background 0.1s;
+}
+
+.iconItem:hover {
+  background: #f0f4ff;
+}
+
+.iconItem:active {
+  cursor: grabbing;
+}
+
+.iconLabel {
+  font-size: 9px;
+  color: #555;
+  text-align: center;
+  line-height: 1.2;
+  word-break: break-word;
+  hyphens: auto;
+}
+

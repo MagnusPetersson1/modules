@@ -1,0 +1,28 @@
+# Node / TypeScript / React
+node_modules/
+dist/
+build/
+.vite/
+*.local
+.env
+.env.*
+!.env.example
+
+# .NET Core
+bin/
+obj/
+*.user
+*.suo
+.vs/
+*.log
+*.swp
+launchSettings.json
+
+# OS
+.DS_Store
+Thumbs.db
+
+# Editor
+.vscode/settings.json
+.idea/
+*.iml

@@ -1,0 +1,27 @@
+.root {
+  display: flex;
+  flex-direction: column;
+  height: 100vh;
+  overflow: hidden;
+  font-family: -apple-system, BlinkMacSystemFont, 'Segoe UI', sans-serif;
+}
+
+.workspace {
+  display: flex;
+  flex: 1;
+  overflow: hidden;
+}
+
+.dslPane {
+  width: 40%;
+  min-width: 280px;
+  max-width: 600px;
+  border-right: 1px solid #ddd;
+  overflow: hidden;
+  resize: horizontal;
+}
+
+.canvasPane {
+  flex: 1;
+  overflow: hidden;
+}

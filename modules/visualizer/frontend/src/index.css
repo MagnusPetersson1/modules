@@ -1,0 +1,26 @@
+*, *::before, *::after {
+  box-sizing: border-box;
+  margin: 0;
+  padding: 0;
+}
+
+body {
+  font-family: -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, sans-serif;
+  font-size: 14px;
+  color: #222;
+  background: #fff;
+}
+
+/* ── Monaco editor decorations ─────────────────────────────────────────────── */
+
+/* Whole-line background for the selected element's YAML block */
+.aml-highlight {
+  background: rgba(255, 213, 0, 0.18) !important;
+}
+
+/* Left gutter marker */
+.aml-highlight-gutter {
+  background: #f5a623;
+  width: 3px !important;
+  margin-left: 3px;
+}
