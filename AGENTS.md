@@ -55,6 +55,31 @@ modules/<name>/
 4. Add tests for new behaviour — frontend with Vitest, backend with xUnit
 5. Keep `docs/index.md` up to date with user-facing usage instructions
 
+## Copilot Skills, Prompts & Instructions
+
+The `.github/` folder contains Copilot-ready authoring tools for the Visualizer module:
+
+| File | Purpose | Activates |
+|---|---|---|
+| `.github/instructions/aml.instructions.md` | Full AML language reference | `**/*.arch` files |
+| `.github/instructions/aml-editor.instructions.md` | Editing rules + inline completion hints | `**/*.arch` files |
+| `.github/instructions/backend.instructions.md` | .NET backend conventions | `modules/*/backend/**` |
+| `.github/instructions/frontend.instructions.md` | React/TS frontend conventions | `modules/*/frontend/**` |
+| `.github/skills/aml-diagram/SKILL.md` | Generate or convert diagrams to AML | invoked as `/aml-diagram` |
+| `.github/skills/new-module/SKILL.md` | Scaffold a new module | invoked as `/new-module` |
+| `.github/prompts/new-diagram.prompt.md` | Create a new `.arch` file from scratch | invoked as a prompt |
+| `.github/prompts/edit-diagram.prompt.md` | Add/remove/modify elements in an existing `.arch` file | invoked as a prompt |
+| `.github/prompts/add-module.prompt.md` | Scaffold a new module interactively | invoked as a prompt |
+
+### Using Copilot to generate AML
+
+Because `aml.instructions.md` is automatically injected when a `.arch` file is open, Copilot can generate valid AML from plain English in any project that includes this `.github/` folder. Typical workflows:
+
+- **New diagram from scratch**: run the `new-diagram` prompt, describe the system in plain English
+- **Convert Mermaid/Structurizr**: paste the DSL into the `new-diagram` prompt — the `/aml-diagram` skill handles conversion
+- **Edit existing diagram**: run the `edit-diagram` prompt with an instruction like *"add a Redis cache between API and database"*
+- **Inline completion**: open any `.arch` file and use Copilot inline completions — the full spec is in context
+
 ---
 
 ## Module: Visualizer

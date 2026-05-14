@@ -161,6 +161,7 @@ export default function App() {
       {exportOpen && (
         <ExportDialog
           workspaceName={model?.workspace.name ?? 'diagram'}
+          model={model}
           onClose={() => setExportOpen(false)}
         />
       )}

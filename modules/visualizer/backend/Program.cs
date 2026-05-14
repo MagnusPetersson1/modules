@@ -1,4 +1,5 @@
 using Visualizer.Services;
+using Visualizer.Services.Export;
 
 var builder = WebApplication.CreateBuilder(args);
 
@@ -9,6 +10,9 @@ builder.Services.AddEndpointsApiExplorer();
 builder.Services.AddSingleton<AmlParser>();
 builder.Services.AddSingleton<AmlFormatter>();
 builder.Services.AddSingleton<AmlValidator>();
+
+// Export services
+builder.Services.AddSingleton<DrawIoExporter>();
 
 builder.Services.AddCors(options =>
 {

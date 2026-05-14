@@ -1,12 +1,13 @@
 using Microsoft.AspNetCore.Mvc;
 using Visualizer.Models;
 using Visualizer.Services;
+using Visualizer.Services.Export;
 
 namespace Visualizer.Controllers;
 
 [ApiController]
 [Route("api/workspace")]
-public class WorkspaceController(AmlParser parser, AmlFormatter formatter, AmlValidator validator) : ControllerBase
+public class WorkspaceController(AmlParser parser, AmlFormatter formatter, AmlValidator validator, DrawIoExporter drawIoExporter) : ControllerBase
 {
     // POST /api/workspace/parse
     [HttpPost("parse")]
@@ -81,6 +82,14 @@ public class WorkspaceController(AmlParser parser, AmlFormatter formatter, AmlVa
         if (styleHint is not null) suggestions.Add(styleHint);
 
         return Ok(new SuggestResponse(layoutHint, suggestions));
+    }
+
+    // POST /api/workspace/export/drawio
+    [HttpPost("export/drawio")]
+    public IActionResult ExportDrawIo([FromBody] WorkspaceModel model)
+    {
+        var xml = drawIoExporter.Export(model);
+        return File(System.Text.Encoding.UTF8.GetBytes(xml), "application/xml", "diagram.drawio");
     }
 }
 
