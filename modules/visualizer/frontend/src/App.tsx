@@ -7,6 +7,7 @@ import { ViewTabs } from './components/ViewTabs'
 import { Toolbar } from './components/Toolbar'
 import { WorkspaceInfoPanel } from './components/WorkspaceInfoPanel'
 import { ExportDialog } from './components/ExportDialog'
+import { ImportDialog } from './components/ImportDialog'
 import styles from './App.module.css'
 
 const DEFAULT_DSL = `workspace:
@@ -66,6 +67,7 @@ export default function App() {
   const [selectedElementId, setSelectedElementId] = useState<string | null>(null)
   const [infoOpen, setInfoOpen] = useState(false)
   const [exportOpen, setExportOpen] = useState(false)
+  const [importOpen, setImportOpen] = useState(false)
   const debounceRef = useRef<ReturnType<typeof setTimeout> | null>(null)
 
   // Parse the default DSL on first mount so the canvas is populated immediately
@@ -133,9 +135,16 @@ export default function App() {
     setLayoutTick(t => t + 1)
   }, [])
 
+  const handleImportComplete = useCallback((newModel: WorkspaceModel, amlDsl: string) => {
+    setModel(newModel)
+    setDsl(amlDsl)
+    setErrors([])
+    setActiveViewId(newModel.views[0]?.id ?? '')
+  }, [])
+
   return (
     <div className={styles.root}>
-      <Toolbar onAutoLayout={handleAutoLayout} onOpenFile={handleOpenFile} onSaveFile={handleSaveFile} onWorkspaceInfo={() => setInfoOpen(true)} onExport={() => setExportOpen(true)} />
+      <Toolbar onAutoLayout={handleAutoLayout} onOpenFile={handleOpenFile} onSaveFile={handleSaveFile} onWorkspaceInfo={() => setInfoOpen(true)} onExport={() => setExportOpen(true)} onImport={() => setImportOpen(true)} />
       <ViewTabs model={model} activeViewId={activeViewId} onSelect={setActiveViewId} />
       <div className={styles.workspace}>
         <div className={styles.dslPane}>
@@ -156,6 +165,12 @@ export default function App() {
           model={model}
           onModelChange={handleModelChange}
           onClose={() => setInfoOpen(false)}
+        />
+      )}
+      {importOpen && (
+        <ImportDialog
+          onImport={handleImportComplete}
+          onClose={() => setImportOpen(false)}
         />
       )}
       {exportOpen && (

@@ -61,6 +61,7 @@ The `.github/` folder contains Copilot-ready authoring tools for the Visualizer 
 
 | File | Purpose | Activates |
 |---|---|---|
+| `.github/instructions/aml-workspace.instructions.md` | Always-on AML context (`applyTo: "**"`) | every Copilot Chat message |
 | `.github/instructions/aml.instructions.md` | Full AML language reference | `**/*.arch` files |
 | `.github/instructions/aml-editor.instructions.md` | Editing rules + inline completion hints | `**/*.arch` files |
 | `.github/instructions/backend.instructions.md` | .NET backend conventions | `modules/*/backend/**` |
@@ -70,13 +71,20 @@ The `.github/` folder contains Copilot-ready authoring tools for the Visualizer 
 | `.github/prompts/new-diagram.prompt.md` | Create a new `.arch` file from scratch | invoked as a prompt |
 | `.github/prompts/edit-diagram.prompt.md` | Add/remove/modify elements in an existing `.arch` file | invoked as a prompt |
 | `.github/prompts/add-module.prompt.md` | Scaffold a new module interactively | invoked as a prompt |
+| `.github/prompts/c4-context.prompt.md` | Generate a C4 Level 1 System Context diagram | invoked as a prompt |
+| `.github/prompts/c4-container.prompt.md` | Generate a C4 Level 2 Container diagram | invoked as a prompt |
+| `.github/prompts/sequence-diagram.prompt.md` | Generate a sequence diagram with fragments | invoked as a prompt |
+| `.github/prompts/convert-to-aml.prompt.md` | Convert Mermaid / Structurizr / PlantUML to AML | invoked as a prompt |
 
 ### Using Copilot to generate AML
 
-Because `aml.instructions.md` is automatically injected when a `.arch` file is open, Copilot can generate valid AML from plain English in any project that includes this `.github/` folder. Typical workflows:
+`copilot-instructions.md` is always injected into every Copilot Chat interaction — making the entire workspace AML-aware without opening any `.arch` file. The `aml.instructions.md` instruction activates when a `.arch` file is open and provides the full spec for inline completions. Typical workflows:
 
 - **New diagram from scratch**: run the `new-diagram` prompt, describe the system in plain English
-- **Convert Mermaid/Structurizr**: paste the DSL into the `new-diagram` prompt — the `/aml-diagram` skill handles conversion
+- **C4 Context diagram**: run the `c4-context` prompt — includes guided steps and a worked example
+- **C4 Container diagram**: run the `c4-container` prompt — prompts for technology labels on each container
+- **Sequence diagram**: run the `sequence-diagram` prompt — supports fragments (alt/loop/par/opt) and all step types
+- **Convert Mermaid/Structurizr/PlantUML**: run the `convert-to-aml` prompt and paste the source DSL
 - **Edit existing diagram**: run the `edit-diagram` prompt with an instruction like *"add a Redis cache between API and database"*
 - **Inline completion**: open any `.arch` file and use Copilot inline completions — the full spec is in context
 

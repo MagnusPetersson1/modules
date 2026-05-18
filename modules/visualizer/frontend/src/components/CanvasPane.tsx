@@ -198,6 +198,38 @@ function CanvasPaneInner({ model, viewId, onModelChange, triggerLayout, onSelect
     onModelChange(newModel)
   }, [model, onModelChange, setNodes])
 
+  // Waypoints changed by dragging a handle → persist to model
+  const handleWaypointsChange = useCallback((edgeId: string, waypoints: { x: number; y: number }[]) => {
+    if (!model) return
+    skipNextModelSync.current = true
+    setEdges(eds => eds.map(e => {
+      if (e.id !== edgeId) return e
+      const current = (e.data?.style ?? {}) as RelationshipStyleConfig
+      const newStyle = { ...current, waypoints: waypoints.length > 0 ? waypoints : undefined }
+      return { ...e, data: { ...e.data, style: newStyle } }
+    }))
+    const newModel: WorkspaceModel = {
+      ...model,
+      views: model.views.map(v => {
+        if (v.id !== viewId) return v
+        return {
+          ...v,
+          styles: {
+            ...v.styles,
+            relationships: {
+              ...v.styles?.relationships,
+              [edgeId]: {
+                ...(v.styles?.relationships?.[edgeId] ?? {}),
+                waypoints: waypoints.length > 0 ? waypoints : undefined,
+              },
+            },
+          },
+        }
+      }),
+    }
+    onModelChange(newModel)
+  }, [model, viewId, onModelChange, setEdges])
+
   // Edge label edited inline → update relationship label in model
   const handleEdgeLabelChange = useCallback((edgeId: string, newLabel: string) => {
     if (!model) return
@@ -498,7 +530,7 @@ function CanvasPaneInner({ model, viewId, onModelChange, triggerLayout, onSelect
             onResizeEnd: handleResizeEnd,
           },
         }))}
-        edges={edges.map(e => ({ ...e, reconnectable: true, data: { ...e.data, onLabelChange: handleEdgeLabelChange } }))}
+        edges={edges.map(e => ({ ...e, reconnectable: true, data: { ...e.data, onLabelChange: handleEdgeLabelChange, onWaypointsChange: handleWaypointsChange } }))}
         nodeTypes={nodeTypes}
         edgeTypes={edgeTypes}
         onNodesChange={onNodesChange}

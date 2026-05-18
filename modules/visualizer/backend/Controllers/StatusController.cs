@@ -2,12 +2,13 @@ using Microsoft.AspNetCore.Mvc;
 using Visualizer.Models;
 using Visualizer.Services;
 using Visualizer.Services.Export;
+using Visualizer.Services.Import;
 
 namespace Visualizer.Controllers;
 
 [ApiController]
 [Route("api/workspace")]
-public class WorkspaceController(AmlParser parser, AmlFormatter formatter, AmlValidator validator, DrawIoExporter drawIoExporter) : ControllerBase
+public class WorkspaceController(AmlParser parser, AmlFormatter formatter, AmlValidator validator, DrawIoExporter drawIoExporter, MermaidImporter mermaidImporter, StructurizrImporter structurizrImporter) : ControllerBase
 {
     // POST /api/workspace/parse
     [HttpPost("parse")]
@@ -91,6 +92,22 @@ public class WorkspaceController(AmlParser parser, AmlFormatter formatter, AmlVa
         var xml = drawIoExporter.Export(model);
         return File(System.Text.Encoding.UTF8.GetBytes(xml), "application/xml", "diagram.drawio");
     }
+
+    // POST /api/workspace/import/mermaid
+    [HttpPost("import/mermaid")]
+    public ActionResult<ImportResponse> ImportMermaid([FromBody] DslRequest req)
+    {
+        var result = mermaidImporter.Import(req.Dsl ?? "");
+        return Ok(new ImportResponse(result.Model, result.Warnings));
+    }
+
+    // POST /api/workspace/import/structurizr
+    [HttpPost("import/structurizr")]
+    public ActionResult<ImportResponse> ImportStructurizr([FromBody] DslRequest req)
+    {
+        var result = structurizrImporter.Import(req.Dsl ?? "");
+        return Ok(new ImportResponse(result.Model, result.Warnings));
+    }
 }
 
 public record DslRequest(string? Dsl);
@@ -98,4 +115,5 @@ public record ParseResponse(WorkspaceModel? Model, List<ParseError> Errors);
 public record FormatResponse(string Dsl);
 public record LayoutHint(string Algorithm, string Direction);
 public record SuggestResponse(LayoutHint Layout, List<string> Suggestions);
+public record ImportResponse(WorkspaceModel Model, List<string> Warnings);
 

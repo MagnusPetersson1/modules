@@ -6,9 +6,10 @@ interface Props {
   onSaveFile: () => void
   onWorkspaceInfo: () => void
   onExport: () => void
+  onImport: () => void
 }
 
-export function Toolbar({ onAutoLayout, onOpenFile, onSaveFile, onWorkspaceInfo, onExport }: Props) {
+export function Toolbar({ onAutoLayout, onOpenFile, onSaveFile, onWorkspaceInfo, onExport, onImport }: Props) {
   return (
     <div className={styles.toolbar}>
       <span className={styles.brand}>Visualizer</span>
@@ -17,6 +18,7 @@ export function Toolbar({ onAutoLayout, onOpenFile, onSaveFile, onWorkspaceInfo,
       <span className={styles.divider} />
       <button className={styles.btn} onClick={onAutoLayout} title="Auto-layout with ElkJS">Auto-layout</button>
       <span className={styles.divider} />
+      <button className={styles.btn} onClick={onImport} title="Import Mermaid or Structurizr DSL">Import</button>
       <button className={styles.btn} onClick={onExport} title="Export diagram">Export</button>
       <button className={styles.btn} onClick={onWorkspaceInfo} title="Workspace context &amp; AI suggestions">Info</button>
     </div>

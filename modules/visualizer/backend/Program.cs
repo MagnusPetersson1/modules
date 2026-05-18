@@ -1,5 +1,6 @@
 using Visualizer.Services;
 using Visualizer.Services.Export;
+using Visualizer.Services.Import;
 
 var builder = WebApplication.CreateBuilder(args);
 
@@ -13,6 +14,10 @@ builder.Services.AddSingleton<AmlValidator>();
 
 // Export services
 builder.Services.AddSingleton<DrawIoExporter>();
+
+// Import services
+builder.Services.AddSingleton<MermaidImporter>();
+builder.Services.AddSingleton<StructurizrImporter>();
 
 builder.Services.AddCors(options =>
 {

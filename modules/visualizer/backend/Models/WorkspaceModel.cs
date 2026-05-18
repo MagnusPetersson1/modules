@@ -113,6 +113,8 @@ public record ElementStyleConfig(
     string? LabelPlacement = null  // top | bottom | left | right
 );
 
+public record WaypointModel(double X, double Y);
+
 public record RelationshipStyleConfig(
     string? LineStyle = null,    // solid | dashed | dotted | double
     string? ArrowEnd = null,     // open | filled | none | diamond | odiamond
@@ -122,7 +124,8 @@ public record RelationshipStyleConfig(
     string? BendStyle = null,    // straight | curved | orthogonal | elbow
     string? LabelPosition = null, // center | source | target
     string? SourceHandle = null,
-    string? TargetHandle = null
+    string? TargetHandle = null,
+    List<WaypointModel>? Waypoints = null
 );
 
 // ── Sequence ──────────────────────────────────────────────────────────────────

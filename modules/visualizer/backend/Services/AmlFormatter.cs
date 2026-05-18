@@ -131,6 +131,8 @@ public class AmlFormatter
         if (s.LabelPosition is not null) d["labelPosition"] = s.LabelPosition;
         if (s.SourceHandle is not null) d["sourceHandle"] = s.SourceHandle;
         if (s.TargetHandle is not null) d["targetHandle"] = s.TargetHandle;
+        if (s.Waypoints is { Count: > 0 })
+            d["waypoints"] = s.Waypoints.Select(w => new Dictionary<string, object> { ["x"] = w.X, ["y"] = w.Y }).ToList();
         return d;
     }
 

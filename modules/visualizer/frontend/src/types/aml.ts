@@ -112,6 +112,7 @@ export interface RelationshipStyleConfig {
   labelPosition?: LabelPosition
   sourceHandle?: string
   targetHandle?: string
+  waypoints?: { x: number; y: number }[]
 }
 
 export interface ViewStyles {

@@ -11,6 +11,15 @@ body {
   background: #fff;
 }
 
+/* ── Edge hover / selection ─────────────────────────────────────────────────── */
+
+/* Thicken edges on hover */
+.react-flow__edge:hover .react-flow__edge-path {
+  stroke-width: 3 !important;
+  filter: drop-shadow(0 0 3px rgba(21, 101, 192, 0.35));
+  cursor: pointer;
+}
+
 /* ── Monaco editor decorations ─────────────────────────────────────────────── */
 
 /* Whole-line background for the selected element's YAML block */

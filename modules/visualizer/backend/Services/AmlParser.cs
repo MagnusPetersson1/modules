@@ -138,7 +138,8 @@ public class AmlParser
             kv => new RelationshipStyleConfig(
                 kv.Value.LineStyle, kv.Value.ArrowEnd, kv.Value.ArrowStart,
                 kv.Value.Color, kv.Value.Thickness, kv.Value.BendStyle, kv.Value.LabelPosition,
-                kv.Value.SourceHandle, kv.Value.TargetHandle));
+                kv.Value.SourceHandle, kv.Value.TargetHandle,
+                kv.Value.Waypoints?.Select(w => new WaypointModel(w.X, w.Y)).ToList()));
         return new ViewStyles(elements, rels);
     }
 
@@ -309,6 +310,13 @@ public class AmlParser
         public string? LabelPosition { get; set; }
         public string? SourceHandle { get; set; }
         public string? TargetHandle { get; set; }
+        public List<RawWaypoint>? Waypoints { get; set; }
+    }
+
+    private class RawWaypoint
+    {
+        public double X { get; set; }
+        public double Y { get; set; }
     }
 
     private class RawStep
